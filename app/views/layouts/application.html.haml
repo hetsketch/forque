@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Forque
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-inverse
+      .container
+        %ul.nav.navbar-nav
+          %li.active
+            = link_to 'Home', root_path
+          %li
+            = link_to 'Forum', topics_path
+        %ul.nav.navbar-nav.navbar-right
+          - unless user_signed_in?
+            %li
+              = link_to 'Login', new_user_session_path
+            %li
+              = link_to 'Sign up', new_user_registration_path
+          - else
+            %li
+              = link_to current_user[:username], edit_user_registration_path
+            %li
+              = link_to 'Sign out', destroy_user_session_path, method: 'delete'
+    .container
+      - if notice
+        %p.alert.alert-success
+          = notice
+      - if alert
+        %p.alert.alert-danger
+          = alert
+    = yield

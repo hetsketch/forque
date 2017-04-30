@@ -1,0 +1,15 @@
+.container
+  .row
+    .col-md-8
+      %h1 Create topic
+      = form_for @topic, url: {action: 'create'}, html: {class: 'form-horizontal'} do |f|
+        .form-group
+          = f.label :title
+          %br/
+          = f.text_field :title, class: 'form-control'
+        .form-group
+          = f.label :text
+          %br/
+          = f.text_area :text, class: 'form-control'
+        .actions
+          = f.submit "Create topic", class: 'btn btn-default'

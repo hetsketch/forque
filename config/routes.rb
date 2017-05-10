@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :topics
+  resources :events
 
   root to: 'welcome#index'
 end

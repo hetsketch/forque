@@ -54,6 +54,11 @@
             %em
               = @minimum_password_length
               characters minimum
+        .form-group
+          = f.label :avatar
+          %br/
+          = image_tag current_user.avatar.url
+          = f.file_field :avatar
         -#PASSWORD CONFIRM
         .form-group
           = f.label :password_confirmation

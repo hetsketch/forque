@@ -12,6 +12,8 @@ class User < ApplicationRecord
   validates :city, length: {in: 10..50, message: 'First name should be between 10 and 50 characters'}, allow_nil: true, allow_blank: true
   validates :bio, length: {in: 10..300, message: 'First name should be between 10 and 300 characters'}, allow_nil: true, allow_blank: true
   
+  mount_uploader :avatar, AvatarUploader
+  
   has_one :company
   has_many :topics
 end

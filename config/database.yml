@@ -1,18 +1,14 @@
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: 5
   timeout: 5000
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: myapp_development
-  pool: 5
-  username: postgres
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
   database: myapp_test
@@ -20,3 +16,4 @@ test:
 production:
   <<: *default
   database: myapp_production
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>

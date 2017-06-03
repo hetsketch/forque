@@ -1,0 +1,11 @@
+.row
+  %h3=@company.name
+  %h5=@company.owner.username
+  %p=@company.city
+  %p=@company.info
+  - if @company.employees.present?
+    =link_to 'Employees', company_employees_path(@company)
+    %ul
+      - @company.employees.each do |employee|
+        %li
+          = employee.user.username

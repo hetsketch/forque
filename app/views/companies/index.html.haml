@@ -1,0 +1,9 @@
+.row
+  .col-md-8
+    %h2.pull-left Companies
+    = link_to 'Create company', new_company_path, class: 'btn btn-success btn-sm pull-right'
+.row
+  .col-md-8
+    - @companies.each do |company|
+      %h3
+        = link_to company.name, company_path(company)

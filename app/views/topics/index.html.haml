@@ -1,11 +1,23 @@
 .row
   .col-md-8
-    = link_to 'Create topic', new_topic_path, class: 'btn btn-success btn-sm'
+    %h2.pull-left Forque forum
+    = link_to 'Create topic', new_topic_path, class: 'btn btn-success btn-sm pull-right'
+  .col-md-4
+    .pull-right
+      %h3 Latest comments
 .row
   .col-md-8
-    %ul.list-group
-      - @topics.each do |topic|
-        %li.list-group-item
-          = link_to topic.title, topic_path(topic)
-          = link_to 'Edit', edit_topic_path(topic), class: 'pull-right'
-          = link_to 'Delete', topic_path(topic), method: 'delete', class: 'pull-right'
+    - @topics.each do |topic|
+      %h3
+        = link_to topic.title, topic_path(topic)
+      %p
+        = topic.text
+      %div
+        %span.badge Posted #{topic.publish_date.to_formatted_s(:long_ordinal)}
+        .pull-right
+          %span.label.label-default alice
+          %span.label.label-primary story
+          %span.label.label-success blog
+          %span.label.label-info personal
+          %span.label.label-warning Warning
+          %span.label.label-danger Danger

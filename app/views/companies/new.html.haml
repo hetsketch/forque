@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-md-8
+      %h1 Create company
+      = simple_form_for @company do |f|
+        = f.input :name
+        = f.input :city
+        = f.input :info, as: :text
+        .form-group
+          = f.button :submit

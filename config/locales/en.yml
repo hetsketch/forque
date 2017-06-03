@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        too_short: "%{attribute} should be more than %{count} characters"
+        too_long:  "%{attribute} should be less than %{count} characters"
+        blank:     "%{attribute} can't be blank"

@@ -5,11 +5,12 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
 
   def index
-    @topics = Topic.all
+    @topics = Topic.all.recently_added
   end
 
   def show
-    @topic = Topic.find_by(id: params[:id])
+    topic
+    @comment = Comment.new
   end
 
   def new
@@ -28,8 +29,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = Topic.find_by(id: params[:id])
-    if @topic && @topic.author == current_user
+    if topic && topic.author == current_user
       render 'edit'
     else
       redirect_to topics_path
@@ -37,13 +37,12 @@ class TopicsController < ApplicationController
   end
 
   def update
-    Topic.update(topic_params)
+    Topic.update!(topic_params)
     redirect_to topic_path
   end
 
   def destroy
-    @topic = Topic.find_by(id: params[:id])
-    @topic&.destroy
+    topic&.destroy
     redirect_to topics_path
   end
 
@@ -51,5 +50,9 @@ class TopicsController < ApplicationController
 
   def topic_params
     params.require(:topic).permit(:title, :text, :publish_date)
+  end
+
+  def topic
+    @topic ||= Topic.find_by(id: params[:id])
   end
 end

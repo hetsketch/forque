@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-FactoryGirl.describe do
+FactoryGirl.define do
   factory :event do
-    title      Faker::Lorem.sentence
-    text       Faker::Lorem.sentences
-    start_time Faker::Time.backward
-    end_time   Faker::Time.forward
+    sequence(:title) { |n| "#{Faker::Lorem.words(8)}#{n}" }
+    sequence(:text)  { |n| "#{Faker::Lorem.paragraph(5)}#{n}" }
+    start_time       Faker::Time.backward
+    end_time         Faker::Time.forward
 
-    attributes :author, factory: :user
+    association :author, factory: :user
   end
 end

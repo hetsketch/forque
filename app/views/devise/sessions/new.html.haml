@@ -1,18 +1,12 @@
-.container
-  .row
-    .col-md-4.col-md-offset-4
-      %h2 Log in
-      = form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f|
-        .form-group
-          = f.label :email
-          = f.email_field :email, autofocus: true, class: 'form-control'
-        .form-group
-          = f.label :password
-          = f.password_field :password, autocomplete: "off", class: 'form-control'
+.row
+  %h5.center-align Log in
+  .col.m6.offset-m3
+    .card.log-in-card.z-depth-1.grey.lighten-4.hoverable
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { autocompelte: 'off' }) do |f|
+        = f.input :email
+        = f.input :password
         - if devise_mapping.rememberable?
-          .form-group
-            = f.check_box :remember_me
-            = f.label :remember_me
-        .actions
-          = f.submit "Log in", class: 'btn btn-default'
+          = f.check_box :remember_me
+        .form-actions
+          = f.submit 'Log in', class: 'btn btn-large waves-effect indigo full-width'
       = render "devise/shared/links"

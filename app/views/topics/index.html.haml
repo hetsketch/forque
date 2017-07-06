@@ -1,23 +1,29 @@
 .row
-  .col-md-8
-    %h2.pull-left Forque forum
-    = link_to 'Create topic', new_topic_path, class: 'btn btn-success btn-sm pull-right'
-  .col-md-4
-    .pull-right
-      %h3 Latest comments
-.row
-  .col-md-8
-    - @topics.each do |topic|
-      %h3
-        = link_to topic.title, topic_path(topic)
-      %p
-        = topic.text
-      %div
-        %span.badge Posted #{topic.publish_date.to_formatted_s(:long_ordinal)}
-        .pull-right
-          %span.label.label-default alice
-          %span.label.label-primary story
-          %span.label.label-success blog
-          %span.label.label-info personal
-          %span.label.label-warning Warning
-          %span.label.label-danger Danger
+  .col.m8
+    .row
+      .col.m12
+        .valign-wrapper.heading-button
+          %h4 Forum
+          = link_to 'Create topic', new_topic_path, class: 'waves-effect waves-light btn'
+    .row
+      - @topics.each do |topic|
+        .col.m12
+          .card.grey.lighten-5.z-depth-1
+            .card-content.white-text.row.valign-wrapper
+              .col.m2
+                = link_to user_path(topic.author) do
+                  = image_tag topic.author.avatar.thumb, class: 'circle responsive-img'
+              .col.m10
+                = link_to topic.title, topic_path(topic), class: 'black-text topic-title light'
+            .card-action
+              .row
+                .col.m12
+                  = link_to topic_path(topic), class: 'chip topic-chip valign-wrapper' do
+                    %i.material-icons.mdi-navigation-close comment
+                    %span=topic.comments.count
+                  .chip.topic-chip.valign-wrapper.right
+                    %i.material-icons.mdi-navigation-close visibility
+                    150
+  .col.m4
+    .row
+      %h4.right Latest comments

@@ -1,0 +1,94 @@
+@import "materialize";
+@import "materialize/extras/nouislider";
+@import "material-datetime-picker";
+@import "jquery.jcrop.css";
+@import "font-awesome.css";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  line-height:normal;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.heading-button {
+  justify-content: space-between;
+}
+
+.tiny-card {
+  height: 100px;
+}
+
+.top-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.log-in-card {
+  padding: 32px 48px 32px 48px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.topic-title {
+  font-size: 21px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.topic-chip {
+  display: inline-flex;
+  span {
+    margin-left: 7px;
+  }
+}
+
+.c-datepicker {
+  box-sizing: content-box !important;
+  button {
+    background-color: #fff !important;
+  }
+}
+
+.c-datepicker__calendar {
+  box-sizing: border-box;
+}
+
+.c-datepicker__days {
+  box-sizing: border-box;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: grey;
+  width: 0;
+  td, th {
+    padding: 0;
+    margin-bottom: 2px;
+    text-align: center;
+  }
+}
+
+.c-datepicker__days-head {
+  border: none !important;
+}
+
+.c-btn {
+  @extend .btn
+}
+
+.c-btn--flat {
+  @extend .btn-flat
+}

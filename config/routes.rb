@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   resources :users
   resources :topics
   resources :events
+  resources :comments
+
   resources :companies do
     resources :employees
   end
-
   root to: 'welcome#index'
 end

@@ -1,5 +1,21 @@
 .row
-  %h3=@topic.title
-  %h5=@topic.author.username
-  %p=@topic.text
-  %p=@topic.publish_date
+  .col.m8
+    .card
+      .card-content
+        .card-title
+          .row
+            .col.m12.valign-wrapper
+              = image_tag @topic.author.avatar.thumb, class: 'circle img-responsive'
+              %span.bold= "#{@topic.author.first_name} #{@topic.author.last_name}".upcase
+          %h5=@topic.title
+        %h5=@topic.author.username
+        %p=@topic.text
+        %p=@topic.publish_date
+.row
+  .col.m8
+    %h5 Comments
+    .card
+      .card-content
+        = simple_form_for(@comment) do |f|
+          = f.input :text
+          = f.button :submit

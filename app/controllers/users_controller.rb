@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    redirect_to edit_user_registration_path
   end
 
   def create
@@ -28,7 +28,8 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(
       :username, :email, :password, :password_confirmation, :remember_me,
-      :first_name, :last_name, :address, :city, :bio
+      :first_name, :last_name, :address, :city, :bio, :avatar, :avatar_crop_x,
+      :avatar_crop_y, :avatar_crop_w, :avatar_crop_h
     )
   end
 end

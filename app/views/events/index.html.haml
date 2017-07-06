@@ -1,2 +1,43 @@
-%h1 EventsController#index
-%p Find me in app/views/events_controller/index.html.haml
+.row
+  .col.m8
+    .row
+      .col.m12
+        .valign-wrapper.heading-button
+          %h4 Events
+          = link_to 'Create event', new_event_path, class: 'waves-effect waves-light btn'
+    .row
+      - @events.each do |event|
+        .col.m6
+          .card.blue-grey.darken-1.hoverable.small
+            .card-content.white-text
+              %span.card-title
+                = event.title
+              %p
+                = event.text
+            .card-action
+              = link_to 'View event', event_path(event)
+              = link_to '<i class="tiny material-icons right">close</i>'.html_safe, event_path(event), method: :delete
+              = link_to '<i class="tiny material-icons right">mode edit</i>'.html_safe, edit_event_path(event)
+            -#.panel-footer
+            -#  %span
+            -#    = event.start_time.strftime("%b %d")
+            -#  %span
+            -#    = event.end_time.strftime("%b %d")
+            -#  %span
+            -#    = event.participants.count
+            -#  %span
+            -#    = link_to 'Delete', event_path(event), method: :delete
+            -#  %span
+            -#    = link_to 'Edit', edit_event_path(event)
+  .col.m4
+    .row
+      %h4.right Future events
+    .row
+      - @future_events.each do |event|
+        .col.m9.offset-m3
+          .card.blue-grey.darken-1.hoverable.tiny-card
+            .card-content.white-text
+              %span.card-title
+                = event.title
+              %p
+                = event.text

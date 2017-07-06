@@ -1,2 +1,4 @@
-%h1 EventsController#show
-%p Find me in app/views/events_controller/show.html.haml
+.row
+  .col.m12
+    = @event.title
+    = image_tag @event.photo.thumb.url if @event.photo.present?

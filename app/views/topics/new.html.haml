@@ -1,9 +1,7 @@
-.container
-  .row
-    .col-md-8
-      %h1 Create topic
-      = simple_form_for @topic do |f|
-        = f.input :title
-        = f.input :text, as: :text
-        .form-group
-          = f.button :submit
+.row
+  .col.m8
+    %h4 Create topic
+    = simple_form_for @topic do |f|
+      = f.input :title, input_html: { data: { length: Topic.validators_on(:title)[1].options[:maximum] } }
+      = f.input :text, as: :text, input_html: { data: { length: Topic.validators_on(:text)[1].options[:maximum] } }
+      = f.button :submit

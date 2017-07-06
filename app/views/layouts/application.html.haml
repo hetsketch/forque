@@ -6,34 +6,90 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons'
   %body
-    %nav.navbar.navbar-inverse
+    %header
+      %nav
+        .nav-wrapper.container
+          %ul.left
+            %li
+              = link_to 'Forque', root_path
+            %li
+              = link_to 'Forum', topics_path
+            %li
+              = link_to 'Companies', companies_path
+            %li
+              = link_to 'Events', events_path
+          %ul.right
+            - unless user_signed_in?
+              %li
+                = link_to 'Login', new_user_session_path
+              %li
+                = link_to 'Sign up', new_user_registration_path
+            - else
+              %li
+                %a.button-collapse.show-on-large{"data-activates" => "slide-out", :href => "#"}
+                  %i.material-icons.small menu
+    - if user_signed_in?
+      %aside
+        %ul#slide-out.side-nav
+          %li
+            .userView
+              .background.blue-grey.darken-1
+              = link_to edit_user_registration_path do
+                = image_tag current_user.avatar.thumb.url, class: 'circle' if current_user.avatar.present?
+              %a{:href => "#!name"}
+                %span.white-text.name= current_user.email
+              %a{:href => "#!email"}
+                %span.white-text.email jdandturk@gmail.com
+          %li
+            = link_to edit_user_registration_path do
+              %span Profile
+              %i.material-icons perm_identity
+          %li
+            = link_to edit_user_registration_path do
+              %span Messages
+              %i.material-icons message
+          %li
+            = link_to edit_user_registration_path do
+              %span My topics
+              %i.material-icons list
+          %li
+            = link_to edit_user_registration_path do
+              %span My events
+              %i.material-icons event
+          %li
+            .divider
+          %li
+            = link_to destroy_user_session_path, method: 'delete' do
+              %span.subheader Log out
+    %main
       .container
-        %ul.nav.navbar-nav
-          %li.active
-            = link_to 'Home', root_path
-          %li
-            = link_to 'Forum', topics_path
-          %li
-            = link_to 'Companies', companies_path
-          %li
-            = link_to 'Events', events_path
-        %ul.nav.navbar-nav.navbar-right
-          - unless user_signed_in?
-            %li
-              = link_to 'Login', new_user_session_path
-            %li
-              = link_to 'Sign up', new_user_registration_path
-          - else
-            %li
-              = link_to current_user[:username], edit_user_registration_path
-            %li
-              = link_to 'Sign out', destroy_user_session_path, method: 'delete'
-    .container
-      - if notice
-        %p.alert.alert-success
-          = notice
-      - if alert
-        %p.alert.alert-danger
-          = alert
-      = yield
+        - if notice
+          .card-panel.teal.lighten-2
+            = notice
+        - if alert
+          .red.darken-2.alert.alert-danger
+            = alert
+        = yield
+    -#%footer.page-footer
+    -#  .container
+    -#    .row
+    -#      .col.l6.s12
+    -#        %h5.white-text Footer Content
+    -#        %p.grey-text.text-lighten-4 You can use rows and columns here to organize your footer content.
+    -#      .col.l4.offset-l2.s12
+    -#        %h5.white-text Links
+    -#        %ul
+    -#          %li
+    -#            %a.grey-text.text-lighten-3{:href => "#!"} Link 1
+    -#          %li
+    -#            %a.grey-text.text-lighten-3{:href => "#!"} Link 2
+    -#          %li
+    -#            %a.grey-text.text-lighten-3{:href => "#!"} Link 3
+    -#          %li
+    -#            %a.grey-text.text-lighten-3{:href => "#!"} Link 4
+    -#  .footer-copyright
+    -#    .container
+    -#      © 2014 Copyright Text
+    -#      %a.grey-text.text-lighten-4.right{:href => "#!"} More Links

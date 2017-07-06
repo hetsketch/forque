@@ -12,10 +12,11 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { in: 5..100 }
   validates :username, presence: true, length: { in: 2..30 }
   validates :first_name, :last_name, :position, :city,
-            length: { in: 10..50 }, allow_nil: true, allow_blank: true
+            length: { in: 2..100 }, allow_nil: true, allow_blank: true
   validates :bio, length: { in: 10..300 }, allow_nil: true, allow_blank: true
 
   mount_uploader :avatar, AvatarUploader
+  crop_uploaded :avatar
 
   class << self
     def create_with_omniauth(auth)

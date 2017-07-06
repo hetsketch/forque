@@ -1,9 +1,20 @@
 .row
-  .col-md-8
-    %h2.pull-left Companies
-    = link_to 'Create company', new_company_path, class: 'btn btn-success btn-sm pull-right'
-.row
-  .col-md-8
-    - @companies.each do |company|
-      %h3
-        = link_to company.name, company_path(company)
+  .col.m8
+    .row
+      .col.m12
+        .valign-wrapper.heading-button
+          %h4 Companies
+          = link_to 'Create company', new_company_path, class: 'waves-effect waves-light btn'
+    .row
+      - @companies.each do |company|
+        .col.m6
+          .card.blue-grey.darken-1.hoverable.small
+            .card-content.white-text
+              %span.card-title
+                = link_to company.name, company_path(company)
+              %p
+                = company.info
+            .card-action
+              = link_to 'View company', company_path(company)
+              = link_to '<i class="tiny material-icons right">close</i>'.html_safe, company_path(company), method: :delete
+              = link_to '<i class="tiny material-icons right">mode edit</i>'.html_safe, edit_company_path(company)
